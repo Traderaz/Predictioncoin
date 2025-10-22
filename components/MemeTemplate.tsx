@@ -11,17 +11,23 @@ const MemeTemplate = forwardRef<HTMLDivElement, MemeTemplateProps>(
   ({ question, image }, ref) => {
     return (
       <div ref={ref} className="relative w-full bg-white rounded-2xl overflow-hidden shadow-2xl">
-        {/* Blue Gradient Header with Logo */}
-        <div className="bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 h-28 flex items-center px-8 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
-          <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center shadow-lg relative z-10 p-2">
+        {/* Image Header - Your uploaded image goes here */}
+        {image ? (
+          <div className="w-full h-64 relative overflow-hidden">
             <img 
-              src="/icon.png" 
-              alt="Prediction Coin" 
-              className="w-full h-full object-contain"
+              src={image} 
+              alt="Meme" 
+              className="w-full h-full object-cover"
             />
           </div>
-        </div>
+        ) : (
+          <div className="w-full h-64 bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 flex items-center justify-center">
+            <div className="text-center text-white">
+              <div className="text-6xl mb-3">🖼️</div>
+              <p className="text-xl font-bold">Upload your image</p>
+            </div>
+          </div>
+        )}
 
         {/* Content Area */}
         <div className="p-8 bg-gradient-to-br from-gray-50 to-white">
@@ -30,34 +36,15 @@ const MemeTemplate = forwardRef<HTMLDivElement, MemeTemplateProps>(
             {question}
           </h2>
 
-          {/* Image and Poll Side by Side */}
+          {/* Poll Options - Full Width */}
           <div className="grid grid-cols-2 gap-6 mb-8">
-            {/* Poll Options */}
-            <div className="flex flex-col gap-4">
-              <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-400 rounded-xl p-5 text-center shadow-lg transform hover:scale-105 transition-transform">
-                <div className="text-xl font-bold text-gray-900 mb-1">Yes</div>
-                <div className="text-4xl font-black text-blue-600">57%</div>
-              </div>
-              <div className="bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-400 rounded-xl p-5 text-center shadow-lg transform hover:scale-105 transition-transform">
-                <div className="text-xl font-bold text-gray-900 mb-1">No</div>
-                <div className="text-4xl font-black text-red-600">43%</div>
-              </div>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-400 rounded-xl p-5 text-center shadow-lg transform hover:scale-105 transition-transform">
+              <div className="text-xl font-bold text-gray-900 mb-1">Yes</div>
+              <div className="text-4xl font-black text-blue-600">57%</div>
             </div>
-
-            {/* Image */}
-            <div className="flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden shadow-lg border-2 border-gray-300">
-              {image ? (
-                <img
-                  src={image}
-                  alt="Meme"
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="text-center text-gray-500 p-6">
-                  <div className="text-5xl mb-3">🖼️</div>
-                  <p className="text-sm font-semibold">Your image here</p>
-                </div>
-              )}
+            <div className="bg-gradient-to-br from-red-50 to-red-100 border-2 border-red-400 rounded-xl p-5 text-center shadow-lg transform hover:scale-105 transition-transform">
+              <div className="text-xl font-bold text-gray-900 mb-1">No</div>
+              <div className="text-4xl font-black text-red-600">43%</div>
             </div>
           </div>
 

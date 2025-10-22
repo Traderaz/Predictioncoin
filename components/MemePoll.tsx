@@ -111,14 +111,9 @@ export default function MemePoll({ poll, onVote }: MemePollProps) {
       )}
 
       {/* Stats */}
-      <div className="text-center text-sm text-[rgb(var(--text-secondary))]">
+      <div className="text-center text-sm text-[rgb(var(--text-secondary))] mt-2">
         {poll.totalVotes} total votes
       </div>
-
-      {/* Trade Button */}
-      <button className="w-full mt-4 py-3 bg-yellow-600 hover:bg-yellow-700 dark:hover:bg-yellow-500 rounded-lg font-semibold transition text-white">
-        Trade
-      </button>
     </div>
   );
 }

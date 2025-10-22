@@ -33,20 +33,16 @@ export default function MemeGeneratorPage() {
     setGenerating(true);
 
     try {
-      // Convert the meme to canvas and then to blob
-      const html2canvas = (await import('html2canvas')).default;
-      const canvas = await html2canvas(memeRef.current!);
-      
-      const blob = await new Promise<Blob>((resolve) => {
-        canvas.toBlob((blob: Blob | null) => resolve(blob!), 'image/png');
-      });
+      // Convert base64 image to blob
+      const response = await fetch(uploadedImage);
+      const blob = await response.blob();
 
-      // Upload to Firebase Storage
+      // Upload the original image to Firebase Storage
       const storageRef = ref(storage, `memes/${Date.now()}.png`);
       const snapshot = await uploadBytes(storageRef, blob);
       const imageUrl = await getDownloadURL(snapshot.ref);
 
-      // Create poll in Firestore
+      // Create poll in Firestore with just the uploaded image
       await addDoc(collection(db, 'memePolls'), {
         question,
         image: imageUrl,
@@ -66,7 +62,7 @@ export default function MemeGeneratorPage() {
       }
     } catch (error) {
       console.error('Error creating meme:', error);
-      alert('Error creating meme. For demo purposes, the meme has been created locally!');
+      alert('Error creating meme. Please try again!');
     } finally {
       setGenerating(false);
     }
@@ -129,6 +125,11 @@ export default function MemeGeneratorPage() {
               <label className="block text-sm font-semibold mb-2 text-[rgb(var(--text-primary))]">
                 Upload Image
               </label>
+              <div className="mb-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
+                <p className="text-xs text-blue-700 dark:text-blue-300 font-medium">
+                  💡 <strong>Recommended:</strong> 1200x630px (landscape) or 1080x1080px (square) for best results
+                </p>
+              </div>
               <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-lg p-8 text-center hover:border-blue-500 dark:hover:border-prediction-blue transition cursor-pointer">
                 <input
                   ref={fileInputRef}
@@ -139,24 +140,13 @@ export default function MemeGeneratorPage() {
                   id="image-upload"
                 />
                 <label htmlFor="image-upload" className="cursor-pointer">
-                  {uploadedImage ? (
-                    <div>
-                      <img
-                        src={uploadedImage}
-                        alt="Uploaded"
-                        className="max-h-40 mx-auto rounded-lg mb-2"
-                      />
-                      <p className="text-sm text-[rgb(var(--text-secondary))]">Click to change image</p>
-                    </div>
-                  ) : (
-                    <div>
-                      <div className="text-4xl mb-2">📸</div>
-                      <p className="text-[rgb(var(--text-secondary))]">Click to upload image</p>
-                      <p className="text-xs text-[rgb(var(--text-secondary))] mt-1">
-                        PNG, JPG, GIF up to 10MB
-                      </p>
-                    </div>
-                  )}
+                  <div>
+                    <div className="text-4xl mb-2">📸</div>
+                    <p className="text-[rgb(var(--text-secondary))]">{uploadedImage ? 'Image uploaded! Click to change' : 'Click to upload image'}</p>
+                    <p className="text-xs text-[rgb(var(--text-secondary))] mt-1">
+                      PNG, JPG, GIF up to 10MB
+                    </p>
+                  </div>
                 </label>
               </div>
             </div>
