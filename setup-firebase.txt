@@ -1,0 +1,28 @@
+🔥 FIREBASE SETUP FOR PREDICTION COIN 🔥
+
+STEP 1: Create .env.local file
+================================
+Create a new file named ".env.local" in the root folder and paste this content:
+
+NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyCG6Xeiayk2lUo9vZ0pWP6DW024pKl6RBM
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=predictioncoin-38591.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=predictioncoin-38591
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=predictioncoin-38591.firebasestorage.app
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=713960557855
+NEXT_PUBLIC_FIREBASE_APP_ID=1:713960557855:web:90cac84b03b425b6b4742a
+
+
+STEP 2: Run this command
+=========================
+npm run dev
+
+
+STEP 3: Visit
+=============
+http://localhost:3000
+
+
+THAT'S IT! 🎉
+
+For detailed setup including Firebase rules, see: FIREBASE_SETUP.md
+

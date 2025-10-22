@@ -1,0 +1,20 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Meme Polls - Allow anyone to read and write
+    match /memePolls/{pollId} {
+      allow read: if true;
+      allow create: if true;
+      allow update: if true;
+      allow delete: if false; // Prevent deletion
+    }
+    
+    // Predictions - Allow anyone to read and write (for Firestore caching)
+    match /predictions/{predictionId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}
+
