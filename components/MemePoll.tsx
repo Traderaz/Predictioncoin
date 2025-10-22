@@ -110,10 +110,6 @@ export default function MemePoll({ poll, onVote }: MemePollProps) {
         </div>
       )}
 
-      {/* Stats */}
-      <div className="text-center text-sm text-[rgb(var(--text-secondary))] mt-2">
-        {poll.totalVotes} total votes
-      </div>
     </div>
   );
 }

@@ -5,8 +5,8 @@ export const SITE_CONFIG = {
   shortName: 'PredictCoin',
   description: 'Using prediction markets to meme everything on CT',
   url: 'https://your-domain.vercel.app', // Update this after deployment!
-  twitter: '@predictcnsol',
-  twitterUrl: 'https://x.com/predictcnsol',
+  twitter: '@predictonsol',
+  twitterUrl: 'https://x.com/predictonsol',
   firebaseProject: 'predictioncoin-38591',
 };
 

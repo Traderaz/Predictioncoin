@@ -22,8 +22,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Prediction Coin - Prediction Markets Memes',
     description: 'Using prediction markets to meme everything on CT',
-    creator: '@predictcnsol',
-    site: '@predictcnsol',
+    creator: '@predictonsol',
+    site: '@predictonsol',
   },
   robots: {
     index: true,

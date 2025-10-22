@@ -43,22 +43,12 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <a 
-                  href="https://x.com/predictcnsol" 
+                  href="https://x.com/predictonsol" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-[rgb(var(--text-secondary))] hover:text-[rgb(var(--text-primary))] transition"
                 >
                   𝕏 Twitter
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://polymarket.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="text-[rgb(var(--text-secondary))] hover:text-[rgb(var(--text-primary))] transition"
-                >
-                  📊 Polymarket
                 </a>
               </li>
             </ul>
@@ -67,11 +57,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="border-t border-[rgb(var(--border-color))] mt-8 pt-6 text-center text-sm text-[rgb(var(--text-secondary))]">
-          <p>© {currentYear} Prediction Coin. Built with 💙 on the blockchain.</p>
-          <p className="mt-2 text-xs">
-            Powered by <span className="text-[rgb(var(--accent-blue))] font-semibold">Polymarket</span> • 
-            Hosted on <span className="text-[rgb(var(--accent-blue))] font-semibold">Vercel</span>
-          </p>
+          <p>© {currentYear} Prediction Coin.</p>
         </div>
       </div>
     </footer>
