@@ -38,6 +38,12 @@ export const metadata: Metadata = {
   },
 }
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -53,10 +59,16 @@ export default function RootLayout({
             __html: `
               try {
                 const theme = localStorage.getItem('theme');
-                if (theme === 'dark') {
+                if (theme === 'light') {
+                  // Only remove dark class if user explicitly chose light
+                  document.documentElement.classList.remove('dark');
+                } else {
+                  // Default to dark mode
                   document.documentElement.classList.add('dark');
                 }
-              } catch (e) {}
+              } catch (e) {
+                document.documentElement.classList.add('dark');
+              }
             `,
           }}
         />

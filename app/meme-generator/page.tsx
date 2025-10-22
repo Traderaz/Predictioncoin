@@ -9,7 +9,6 @@ import MemeTemplate from '@/components/MemeTemplate';
 export default function MemeGeneratorPage() {
   const [question, setQuestion] = useState('');
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
-  const [uploading, setUploading] = useState(false);
   const [generating, setGenerating] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const memeRef = useRef<HTMLDivElement>(null);
@@ -39,7 +38,7 @@ export default function MemeGeneratorPage() {
       const canvas = await html2canvas(memeRef.current!);
       
       const blob = await new Promise<Blob>((resolve) => {
-        canvas.toBlob((blob) => resolve(blob!), 'image/png');
+        canvas.toBlob((blob: Blob | null) => resolve(blob!), 'image/png');
       });
 
       // Upload to Firebase Storage
@@ -116,7 +115,7 @@ export default function MemeGeneratorPage() {
                 type="text"
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
-                placeholder="Will Orangie shill prediction coin"
+                placeholder="Enter your prediction question..."
                 className="w-full px-4 py-3 bg-white dark:bg-prediction-dark border border-gray-300 dark:border-gray-700 rounded-lg focus:border-blue-500 dark:focus:border-prediction-blue focus:outline-none text-gray-900 dark:text-white"
                 maxLength={100}
               />
@@ -224,7 +223,7 @@ export default function MemeGeneratorPage() {
             <h2 className="text-2xl font-bold mb-4 text-[rgb(var(--text-primary))]">Preview</h2>
             <MemeTemplate
               ref={memeRef}
-              question={question || 'Your prediction question will appear here'}
+              question={question || ''}
               image={uploadedImage}
             />
           </div>

@@ -15,7 +15,7 @@ export interface Prediction {
 }
 
 // Fetch real Polymarket data from API
-export async function fetchPolymarketPredictions(limit: number = 50): Promise<Prediction[]> {
+export async function fetchPolymarketPredictions(): Promise<Prediction[]> {
   try {
     console.log('🔄 Fetching from Polymarket API...');
     // Use our Next.js API route (bypasses CORS) - fetch more to get better variety
@@ -54,7 +54,7 @@ export async function fetchPolymarketPredictions(limit: number = 50): Promise<Pr
         let noPercentage = 50;
         
         // Try to get outcomePrices from either event or market
-        let outcomePricesRaw = event.outcomePrices || market.outcomePrices;
+        const outcomePricesRaw = event.outcomePrices || market.outcomePrices;
         
         // Parse if it's a JSON string
         let outcomePrices = outcomePricesRaw;

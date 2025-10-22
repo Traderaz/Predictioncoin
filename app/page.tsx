@@ -149,7 +149,7 @@ export default function Home() {
         </div>
         {searchTerm && (
           <p className="text-sm text-[rgb(var(--text-secondary))] mt-2">
-            Showing {searchFilteredPredictions.length} result{searchFilteredPredictions.length !== 1 ? 's' : ''} for "{searchTerm}"
+            Showing {searchFilteredPredictions.length} result{searchFilteredPredictions.length !== 1 ? 's' : ''} for &ldquo;{searchTerm}&rdquo;
           </p>
         )}
       </div>
@@ -204,14 +204,9 @@ export default function Home() {
         </div>
       )}
 
-      {/* Results Count & Display Limit */}
+      {/* Display Limit */}
       {!loading && sortedPredictions.length > 0 && (
-        <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-          <p className="text-[rgb(var(--text-secondary))]">
-            Showing <span className="text-[rgb(var(--text-primary))] font-semibold">{displayedPredictions.length}</span> of{' '}
-            <span className="text-[rgb(var(--text-primary))] font-semibold">{sortedPredictions.length}</span> predictions
-          </p>
-          
+        <div className="flex justify-center items-center mb-6">
           <div className="flex items-center gap-2">
             <span className="text-[rgb(var(--text-secondary))] text-sm">Show:</span>
             {[20, 50, 75, 100].map((limit) => (

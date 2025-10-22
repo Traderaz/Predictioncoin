@@ -7,7 +7,7 @@ export default function NotFound() {
         <div className="text-6xl mb-4">404</div>
         <h2 className="text-3xl font-bold mb-4 gradient-text">Page Not Found</h2>
         <p className="text-gray-400 mb-6">
-          Looks like this prediction market doesn't exist... yet!
+          Looks like this prediction market doesn&apos;t exist... yet!
         </p>
         <Link href="/" className="btn-prediction inline-block">
           Go Home

@@ -2,12 +2,21 @@
 
 import { useState, useEffect } from 'react';
 import { db } from '@/lib/firebase';
-import { collection, addDoc, getDocs, updateDoc, doc, increment } from 'firebase/firestore';
+import { collection, getDocs, updateDoc, doc, increment } from 'firebase/firestore';
 import MemePoll from '@/components/MemePoll';
 import ShareButton from '@/components/ShareButton';
 
+interface MemePoll {
+  id: string;
+  question: string;
+  image: string;
+  yesVotes: number;
+  noVotes: number;
+  totalVotes: number;
+}
+
 export default function MemeVotesPage() {
-  const [polls, setPolls] = useState<any[]>([]);
+  const [polls, setPolls] = useState<MemePoll[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,10 +27,10 @@ export default function MemeVotesPage() {
     try {
       const pollsCollection = collection(db, 'memePolls');
       const pollsSnapshot = await getDocs(pollsCollection);
-      const pollsData = pollsSnapshot.docs.map((doc: any) => ({
+      const pollsData = pollsSnapshot.docs.map((doc) => ({
         id: doc.id,
         ...doc.data()
-      }));
+      })) as MemePoll[];
       setPolls(pollsData);
     } catch (error) {
       console.error('❌ Error loading polls:', error);

@@ -30,12 +30,12 @@ export default function Header() {
           </Link>
 
           {/* Navigation */}
-          <nav className="flex items-center gap-2">
+          <nav className="flex items-center gap-1 md:gap-2">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`px-4 py-2 rounded-lg transition ${
+                className={`px-2 md:px-4 py-2 rounded-lg transition text-xs md:text-base whitespace-nowrap ${
                   pathname === item.href
                     ? 'bg-[rgb(var(--accent-blue))] text-white'
                     : 'text-[rgb(var(--text-secondary))] hover:text-[rgb(var(--text-primary))] hover:bg-[rgb(var(--bg-secondary))]'
