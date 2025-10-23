@@ -10,6 +10,8 @@ export default function MemeGeneratorPage() {
   const [question, setQuestion] = useState('');
   const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
+  const [yesPercentage, setYesPercentage] = useState(57);
+  const [noPercentage, setNoPercentage] = useState(43);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const memeRef = useRef<HTMLDivElement>(null);
 
@@ -151,6 +153,48 @@ export default function MemeGeneratorPage() {
               </div>
             </div>
 
+            {/* Percentage Controls */}
+            <div className="mb-6">
+              <label className="block text-sm font-semibold mb-2 text-[rgb(var(--text-primary))]">
+                Preview Percentages (for download only)
+              </label>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs text-[rgb(var(--text-secondary))] mb-1">YES %</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={yesPercentage}
+                    onChange={(e) => {
+                      const val = Math.min(100, Math.max(0, parseInt(e.target.value) || 0));
+                      setYesPercentage(val);
+                      setNoPercentage(100 - val);
+                    }}
+                    className="w-full px-4 py-2 bg-white dark:bg-prediction-dark border border-gray-300 dark:border-gray-700 rounded-lg focus:border-blue-500 dark:focus:border-prediction-blue focus:outline-none text-gray-900 dark:text-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-[rgb(var(--text-secondary))] mb-1">NO %</label>
+                  <input
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={noPercentage}
+                    onChange={(e) => {
+                      const val = Math.min(100, Math.max(0, parseInt(e.target.value) || 0));
+                      setNoPercentage(val);
+                      setYesPercentage(100 - val);
+                    }}
+                    className="w-full px-4 py-2 bg-white dark:bg-prediction-dark border border-gray-300 dark:border-gray-700 rounded-lg focus:border-blue-500 dark:focus:border-prediction-blue focus:outline-none text-gray-900 dark:text-white"
+                  />
+                </div>
+              </div>
+              <p className="text-xs text-[rgb(var(--text-secondary))] mt-1">
+                ℹ️ These percentages are only for preview/download. Published polls start at 0 votes.
+              </p>
+            </div>
+
             {/* Action Buttons */}
             <div className="space-y-3">
               <button
@@ -215,6 +259,8 @@ export default function MemeGeneratorPage() {
               ref={memeRef}
               question={question || ''}
               image={uploadedImage}
+              yesPercentage={yesPercentage}
+              noPercentage={noPercentage}
             />
           </div>
         </div>
